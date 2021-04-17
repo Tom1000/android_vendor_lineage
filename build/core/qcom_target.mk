@@ -19,9 +19,17 @@ $(call set-device-specific-path,DATA_IPA_CFG_MGR,data-ipa-cfg-mgr,vendor/qcom/op
 $(call set-device-specific-path,DATASERVICES,dataservices,vendor/qcom/opensource/dataservices)
 $(call set-device-specific-path,THERMAL,thermal,hardware/qcom-caf/thermal)
 $(call set-device-specific-path,VR,vr,hardware/qcom-caf/vr)
+
+#for now, stick with CAF
 $(call set-device-specific-path,WLAN,wlan,hardware/qcom-caf/wlan)
 
+ifeq ($(BOARD_WLAN_DEVICE), brcmfmac)
+PRODUCT_CFI_INCLUDE_PATHS += \
+    hardware/qcom-caf/wlan/brcmfmac/wpa_supplicant_8_lib
+else # assume qcwcn
 PRODUCT_CFI_INCLUDE_PATHS += \
     hardware/qcom-caf/wlan/qcwcn/wpa_supplicant_8_lib
+endif 
+
 
 endif
